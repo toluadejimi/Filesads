@@ -5,6 +5,8 @@ namespace App\Lib;
 use App\Constants\FileInfo;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+//use Intervention\Image\ImageManagerStatic as Image;
+
 
 class FileManager
 {
@@ -125,9 +127,41 @@ class FileManager
     * @return void
     */
 	protected function uploadImage(){
+
+
+        // Ensure you're using the GD driver
+//        Image::configure(['driver' => 'gd']);
+//
+//        try {
+//            // Load the image using the make() method
+//            $image = Image::make($this->file);
+//
+//            // Resize the image if a size is specified
+//            if ($this->size) {
+//                $size = explode('x', strtolower($this->size));
+//                $image->resize($size[0], $size[1]);
+//            }
+//
+//            // Save the image to the specified path
+//            $image->save($this->path . '/' . $this->filename);
+//
+//            // Save the image as a thumbnail version if specified
+//            if ($this->thumb) {
+//                if ($this->old) {
+//                    $this->removeFile($this->path . '/thumb_' . $this->old);
+//                }
+//                $thumb = explode('x', $this->thumb);
+//                Image::make($this->file)->resize($thumb[0], $thumb[1])->save($this->path . '/thumb_' . $this->filename);
+//            }
+//
+//        } catch (\Exception $e) {
+//            // Handle the exception (e.g., log the error or show a message)
+//            echo 'Error: ' . $e->getMessage();
+//        }
+
+
         $manager = new ImageManager(new Driver());
         $image = $manager->read($this->file);
-
         //resize the
 	    if ($this->size) {
 	        $size = explode('x', strtolower($this->size));

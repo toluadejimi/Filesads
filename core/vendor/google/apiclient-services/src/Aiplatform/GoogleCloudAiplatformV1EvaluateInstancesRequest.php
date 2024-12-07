@@ -23,6 +23,8 @@ class GoogleCloudAiplatformV1EvaluateInstancesRequest extends \Google\Model
   protected $bleuInputDataType = '';
   protected $coherenceInputType = GoogleCloudAiplatformV1CoherenceInput::class;
   protected $coherenceInputDataType = '';
+  protected $cometInputType = GoogleCloudAiplatformV1CometInput::class;
+  protected $cometInputDataType = '';
   protected $exactMatchInputType = GoogleCloudAiplatformV1ExactMatchInput::class;
   protected $exactMatchInputDataType = '';
   protected $fluencyInputType = GoogleCloudAiplatformV1FluencyInput::class;
@@ -31,10 +33,16 @@ class GoogleCloudAiplatformV1EvaluateInstancesRequest extends \Google\Model
   protected $fulfillmentInputDataType = '';
   protected $groundednessInputType = GoogleCloudAiplatformV1GroundednessInput::class;
   protected $groundednessInputDataType = '';
+  protected $metricxInputType = GoogleCloudAiplatformV1MetricxInput::class;
+  protected $metricxInputDataType = '';
+  protected $pairwiseMetricInputType = GoogleCloudAiplatformV1PairwiseMetricInput::class;
+  protected $pairwiseMetricInputDataType = '';
   protected $pairwiseQuestionAnsweringQualityInputType = GoogleCloudAiplatformV1PairwiseQuestionAnsweringQualityInput::class;
   protected $pairwiseQuestionAnsweringQualityInputDataType = '';
   protected $pairwiseSummarizationQualityInputType = GoogleCloudAiplatformV1PairwiseSummarizationQualityInput::class;
   protected $pairwiseSummarizationQualityInputDataType = '';
+  protected $pointwiseMetricInputType = GoogleCloudAiplatformV1PointwiseMetricInput::class;
+  protected $pointwiseMetricInputDataType = '';
   protected $questionAnsweringCorrectnessInputType = GoogleCloudAiplatformV1QuestionAnsweringCorrectnessInput::class;
   protected $questionAnsweringCorrectnessInputDataType = '';
   protected $questionAnsweringHelpfulnessInputType = GoogleCloudAiplatformV1QuestionAnsweringHelpfulnessInput::class;
@@ -89,6 +97,20 @@ class GoogleCloudAiplatformV1EvaluateInstancesRequest extends \Google\Model
   public function getCoherenceInput()
   {
     return $this->coherenceInput;
+  }
+  /**
+   * @param GoogleCloudAiplatformV1CometInput
+   */
+  public function setCometInput(GoogleCloudAiplatformV1CometInput $cometInput)
+  {
+    $this->cometInput = $cometInput;
+  }
+  /**
+   * @return GoogleCloudAiplatformV1CometInput
+   */
+  public function getCometInput()
+  {
+    return $this->cometInput;
   }
   /**
    * @param GoogleCloudAiplatformV1ExactMatchInput
@@ -147,6 +169,34 @@ class GoogleCloudAiplatformV1EvaluateInstancesRequest extends \Google\Model
     return $this->groundednessInput;
   }
   /**
+   * @param GoogleCloudAiplatformV1MetricxInput
+   */
+  public function setMetricxInput(GoogleCloudAiplatformV1MetricxInput $metricxInput)
+  {
+    $this->metricxInput = $metricxInput;
+  }
+  /**
+   * @return GoogleCloudAiplatformV1MetricxInput
+   */
+  public function getMetricxInput()
+  {
+    return $this->metricxInput;
+  }
+  /**
+   * @param GoogleCloudAiplatformV1PairwiseMetricInput
+   */
+  public function setPairwiseMetricInput(GoogleCloudAiplatformV1PairwiseMetricInput $pairwiseMetricInput)
+  {
+    $this->pairwiseMetricInput = $pairwiseMetricInput;
+  }
+  /**
+   * @return GoogleCloudAiplatformV1PairwiseMetricInput
+   */
+  public function getPairwiseMetricInput()
+  {
+    return $this->pairwiseMetricInput;
+  }
+  /**
    * @param GoogleCloudAiplatformV1PairwiseQuestionAnsweringQualityInput
    */
   public function setPairwiseQuestionAnsweringQualityInput(GoogleCloudAiplatformV1PairwiseQuestionAnsweringQualityInput $pairwiseQuestionAnsweringQualityInput)
@@ -173,6 +223,20 @@ class GoogleCloudAiplatformV1EvaluateInstancesRequest extends \Google\Model
   public function getPairwiseSummarizationQualityInput()
   {
     return $this->pairwiseSummarizationQualityInput;
+  }
+  /**
+   * @param GoogleCloudAiplatformV1PointwiseMetricInput
+   */
+  public function setPointwiseMetricInput(GoogleCloudAiplatformV1PointwiseMetricInput $pointwiseMetricInput)
+  {
+    $this->pointwiseMetricInput = $pointwiseMetricInput;
+  }
+  /**
+   * @return GoogleCloudAiplatformV1PointwiseMetricInput
+   */
+  public function getPointwiseMetricInput()
+  {
+    return $this->pointwiseMetricInput;
   }
   /**
    * @param GoogleCloudAiplatformV1QuestionAnsweringCorrectnessInput

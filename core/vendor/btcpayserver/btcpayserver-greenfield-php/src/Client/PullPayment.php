@@ -50,7 +50,8 @@ class PullPayment extends AbstractClient
         ?bool $autoApproveClaims = false,
         ?int $startsAt,
         ?int $expiresAt,
-        array $paymentMethods
+        ?array $paymentMethods = null,
+        ?string $description = null
     ): ResultPullPayment {
         $url = $this->getApiUrl() . 'stores/' .
                     urlencode($storeId) . '/pull-payments';
@@ -61,6 +62,7 @@ class PullPayment extends AbstractClient
         $body = json_encode(
             [
                 'name' => $name,
+                'description' => $description,
                 'amount' => $amount->__toString(),
                 'currency' => $currency,
                 'period' => $period,
@@ -68,7 +70,8 @@ class PullPayment extends AbstractClient
                 'autoApproveClaims' => $autoApproveClaims,
                 'startsAt' => $startsAt,
                 'expiresAt' => $expiresAt,
-                'paymentMethods' => $paymentMethods
+                'paymentMethods' => $paymentMethods,
+                'payoutMethods' => $paymentMethods
             ],
             JSON_THROW_ON_ERROR
         );

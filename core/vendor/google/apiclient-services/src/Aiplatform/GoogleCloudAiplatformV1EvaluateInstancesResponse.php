@@ -23,6 +23,8 @@ class GoogleCloudAiplatformV1EvaluateInstancesResponse extends \Google\Model
   protected $bleuResultsDataType = '';
   protected $coherenceResultType = GoogleCloudAiplatformV1CoherenceResult::class;
   protected $coherenceResultDataType = '';
+  protected $cometResultType = GoogleCloudAiplatformV1CometResult::class;
+  protected $cometResultDataType = '';
   protected $exactMatchResultsType = GoogleCloudAiplatformV1ExactMatchResults::class;
   protected $exactMatchResultsDataType = '';
   protected $fluencyResultType = GoogleCloudAiplatformV1FluencyResult::class;
@@ -31,10 +33,16 @@ class GoogleCloudAiplatformV1EvaluateInstancesResponse extends \Google\Model
   protected $fulfillmentResultDataType = '';
   protected $groundednessResultType = GoogleCloudAiplatformV1GroundednessResult::class;
   protected $groundednessResultDataType = '';
+  protected $metricxResultType = GoogleCloudAiplatformV1MetricxResult::class;
+  protected $metricxResultDataType = '';
+  protected $pairwiseMetricResultType = GoogleCloudAiplatformV1PairwiseMetricResult::class;
+  protected $pairwiseMetricResultDataType = '';
   protected $pairwiseQuestionAnsweringQualityResultType = GoogleCloudAiplatformV1PairwiseQuestionAnsweringQualityResult::class;
   protected $pairwiseQuestionAnsweringQualityResultDataType = '';
   protected $pairwiseSummarizationQualityResultType = GoogleCloudAiplatformV1PairwiseSummarizationQualityResult::class;
   protected $pairwiseSummarizationQualityResultDataType = '';
+  protected $pointwiseMetricResultType = GoogleCloudAiplatformV1PointwiseMetricResult::class;
+  protected $pointwiseMetricResultDataType = '';
   protected $questionAnsweringCorrectnessResultType = GoogleCloudAiplatformV1QuestionAnsweringCorrectnessResult::class;
   protected $questionAnsweringCorrectnessResultDataType = '';
   protected $questionAnsweringHelpfulnessResultType = GoogleCloudAiplatformV1QuestionAnsweringHelpfulnessResult::class;
@@ -89,6 +97,20 @@ class GoogleCloudAiplatformV1EvaluateInstancesResponse extends \Google\Model
   public function getCoherenceResult()
   {
     return $this->coherenceResult;
+  }
+  /**
+   * @param GoogleCloudAiplatformV1CometResult
+   */
+  public function setCometResult(GoogleCloudAiplatformV1CometResult $cometResult)
+  {
+    $this->cometResult = $cometResult;
+  }
+  /**
+   * @return GoogleCloudAiplatformV1CometResult
+   */
+  public function getCometResult()
+  {
+    return $this->cometResult;
   }
   /**
    * @param GoogleCloudAiplatformV1ExactMatchResults
@@ -147,6 +169,34 @@ class GoogleCloudAiplatformV1EvaluateInstancesResponse extends \Google\Model
     return $this->groundednessResult;
   }
   /**
+   * @param GoogleCloudAiplatformV1MetricxResult
+   */
+  public function setMetricxResult(GoogleCloudAiplatformV1MetricxResult $metricxResult)
+  {
+    $this->metricxResult = $metricxResult;
+  }
+  /**
+   * @return GoogleCloudAiplatformV1MetricxResult
+   */
+  public function getMetricxResult()
+  {
+    return $this->metricxResult;
+  }
+  /**
+   * @param GoogleCloudAiplatformV1PairwiseMetricResult
+   */
+  public function setPairwiseMetricResult(GoogleCloudAiplatformV1PairwiseMetricResult $pairwiseMetricResult)
+  {
+    $this->pairwiseMetricResult = $pairwiseMetricResult;
+  }
+  /**
+   * @return GoogleCloudAiplatformV1PairwiseMetricResult
+   */
+  public function getPairwiseMetricResult()
+  {
+    return $this->pairwiseMetricResult;
+  }
+  /**
    * @param GoogleCloudAiplatformV1PairwiseQuestionAnsweringQualityResult
    */
   public function setPairwiseQuestionAnsweringQualityResult(GoogleCloudAiplatformV1PairwiseQuestionAnsweringQualityResult $pairwiseQuestionAnsweringQualityResult)
@@ -173,6 +223,20 @@ class GoogleCloudAiplatformV1EvaluateInstancesResponse extends \Google\Model
   public function getPairwiseSummarizationQualityResult()
   {
     return $this->pairwiseSummarizationQualityResult;
+  }
+  /**
+   * @param GoogleCloudAiplatformV1PointwiseMetricResult
+   */
+  public function setPointwiseMetricResult(GoogleCloudAiplatformV1PointwiseMetricResult $pointwiseMetricResult)
+  {
+    $this->pointwiseMetricResult = $pointwiseMetricResult;
+  }
+  /**
+   * @return GoogleCloudAiplatformV1PointwiseMetricResult
+   */
+  public function getPointwiseMetricResult()
+  {
+    return $this->pointwiseMetricResult;
   }
   /**
    * @param GoogleCloudAiplatformV1QuestionAnsweringCorrectnessResult
