@@ -71,7 +71,7 @@ class AdController extends Controller
         ]);
 
 
-        dd("hello");
+
 
         if ($request->is_global) {
             $countries = Country::active()->get();
@@ -113,6 +113,9 @@ class AdController extends Controller
                 $notify[] = ['error', 'Image resolution must be ' . $adType->width . 'x' . $adType->height . 'px'];
                 return back()->withNotify($notify)->withInput();
             }
+
+
+            dd("hello");
 
             try {
                 $old       = @$ad->image;
