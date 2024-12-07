@@ -14,6 +14,7 @@ use App\Models\Advertise;
 use App\Models\Keyword;
 use App\Rules\FileTypeValidate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdController extends Controller
 {
@@ -118,10 +119,23 @@ class AdController extends Controller
 
 
             try {
-                $old       = @$ad->image;
-                $ad->image = fileUploader($request->image, getFilePath('advertise'), null, $old);
 
-                dd("hello");
+
+//                $old       = @$ad->image;
+//                $ad->image = fileUploader($request->image, getFilePath('advertise'), null, $old);
+
+                $old = @$ad->image;
+                if ($old && Storage::exists('advertise/' . $old)) {
+                    Storage::delete('advertise/' . $old);
+                }
+                if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                    $image = $request->file('image');
+                    $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+                    $image->storeAs('advertise', $filename, 'public');
+                    $ad->image = $filename;
+                }
+
+                //dd("hello");
 
             } catch (\Exception $exp) {
 
