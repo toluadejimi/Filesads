@@ -115,11 +115,14 @@ class AdController extends Controller
             }
 
 
-            dd("hello");
+
 
             try {
                 $old       = @$ad->image;
                 $ad->image = fileUploader($request->image, getFilePath('advertise'), null, $old);
+
+                dd("hello");
+
             } catch (\Exception $exp) {
 
                 $notify[] = ['error', 'Couldn\'t upload your advertise'];
