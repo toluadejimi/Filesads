@@ -59,7 +59,6 @@ class AdController extends Controller
     public function store(Request $request, $id = 0)
     {
         $isRequired = $id ? 'nullable' : 'required';
-
         $request->validate([
             'title'            => 'required',
             'type'             => 'required|in:click,impression',
@@ -70,6 +69,9 @@ class AdController extends Controller
             'target_country.*' => 'required|required',
             'image'            => [$isRequired, 'image', new FileTypeValidate(['jpg', 'jpeg', 'png', 'gif'])],
         ]);
+
+
+        dd("hello");
 
         if ($request->is_global) {
             $countries = Country::active()->get();
@@ -83,6 +85,7 @@ class AdController extends Controller
 
 
         $advertiser = auth()->guard('advertiser')->user();
+
 
         if ($request->type == 'click' && $advertiser->click_credit <= 0 || $request->type == 'impression' && $advertiser->impression_credit <= 0) {
             $notify[] = ['error', 'Please purchase' . ' ' . ucfirst($request->type) . ' ' . 'plan first'];
