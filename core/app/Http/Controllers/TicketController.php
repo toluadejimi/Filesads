@@ -15,7 +15,7 @@ class TicketController extends Controller
         $this->redirectLink = 'ticket.view';
         $this->userType     = 'publisher';
         $this->column       = 'publisher_id';
-        
+
       if(auth()->guard('publisher')->check()){
             $this->userType     = 'publisher';
             $this->column       = 'publisher_id';
@@ -29,4 +29,14 @@ class TicketController extends Controller
             $this->layout = 'master';
         }
     }
+
+
+
+    public function info()
+    {
+
+      return view ('template.basic.info');
+
+    }
+
 }

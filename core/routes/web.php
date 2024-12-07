@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/clear', function () {
     \Illuminate\Support\Facades\Artisan::call('optimize:clear');
 });
+
+Route::get('info', [TicketController::class, 'info']);
+
 
 
 // User Support Ticket
@@ -30,11 +34,11 @@ Route::controller('SiteController')->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::post('/contact', 'contactSubmit');
     Route::get('/change/{lang?}', 'changeLanguage')->name('lang');
-    
+
     //keyword, Country//
-    
+
     // Route::get('countries', 'countries')->name('countries');
-// 
+//
     Route::get('cookie-policy', 'cookiePolicy')->name('cookie.policy');
 
     Route::get('/cookie/accept', 'cookieAccept')->name('cookie.accept');
