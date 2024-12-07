@@ -186,7 +186,10 @@ class FileManager
     protected function uploadImage()
     {
         try {
-            $manager = new ImageManager(['driver' => 'gd']);
+            // Create an instance of ImageManager with the GD driver
+            $manager = new ImageManager('gd');
+
+            // Read the image file
             $image = $manager->make($this->file);
 
             // Resize the image if size is specified
@@ -225,6 +228,7 @@ class FileManager
             throw new \Exception('Image upload failed: ' . $e->getMessage());
         }
     }
+
 
     /**
     * Upload the file if this is not a image
