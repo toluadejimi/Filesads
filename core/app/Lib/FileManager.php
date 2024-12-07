@@ -186,8 +186,8 @@ class FileManager
     protected function uploadImage()
     {
         try {
-            // Create an instance of ImageManager with the GD driver
-            $manager = new ImageManager('gd');
+            // Create an instance of ImageManager with GD driver
+            $manager = new ImageManager(['driver' => 'gd']);
 
             // Read the image file
             $image = $manager->make($this->file);
