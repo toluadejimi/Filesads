@@ -100,8 +100,6 @@
       <path value="$PROJECT_DIR$/core/vendor/laramin/utility" />
       <path value="$PROJECT_DIR$/core/vendor/psr/log" />
       <path value="$PROJECT_DIR$/core/vendor/psr/cache" />
-      <path value="$PROJECT_DIR$/core/vendor/intervention/image" />
-      <path value="$PROJECT_DIR$/core/vendor/intervention/gif" />
       <path value="$PROJECT_DIR$/core/vendor/laravel/tinker" />
       <path value="$PROJECT_DIR$/core/vendor/laravel/serializable-closure" />
       <path value="$PROJECT_DIR$/core/vendor/laravel/framework" />
@@ -169,6 +167,8 @@
       <path value="$PROJECT_DIR$/core/vendor/spatie/ignition" />
       <path value="$PROJECT_DIR$/core/vendor/spatie/laravel-ignition" />
       <path value="$PROJECT_DIR$/core/vendor/hamcrest/hamcrest-php" />
+      <path value="$PROJECT_DIR$/core/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/core/vendor/intervention/gif" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />

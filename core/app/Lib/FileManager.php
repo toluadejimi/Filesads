@@ -126,60 +126,105 @@ class FileManager
     *
     * @return void
     */
-	protected function uploadImage(){
-
-
-        // Ensure you're using the GD driver
-//        Image::configure(['driver' => 'gd']);
+//	protected function uploadImage(){
 //
-//        try {
-//            // Load the image using the make() method
-//            $image = Image::make($this->file);
 //
-//            // Resize the image if a size is specified
-//            if ($this->size) {
-//                $size = explode('x', strtolower($this->size));
-//                $image->resize($size[0], $size[1]);
+//        // Ensure you're using the GD driver
+////        Image::configure(['driver' => 'gd']);
+////
+////        try {
+////            // Load the image using the make() method
+////            $image = Image::make($this->file);
+////
+////            // Resize the image if a size is specified
+////            if ($this->size) {
+////                $size = explode('x', strtolower($this->size));
+////                $image->resize($size[0], $size[1]);
+////            }
+////
+////            // Save the image to the specified path
+////            $image->save($this->path . '/' . $this->filename);
+////
+////            // Save the image as a thumbnail version if specified
+////            if ($this->thumb) {
+////                if ($this->old) {
+////                    $this->removeFile($this->path . '/thumb_' . $this->old);
+////                }
+////                $thumb = explode('x', $this->thumb);
+////                Image::make($this->file)->resize($thumb[0], $thumb[1])->save($this->path . '/thumb_' . $this->filename);
+////            }
+////
+////        } catch (\Exception $e) {
+////            // Handle the exception (e.g., log the error or show a message)
+////            echo 'Error: ' . $e->getMessage();
+////        }
+//
+//
+//        $manager = new ImageManager(new Driver());
+//        $image = $manager->read($this->file);
+//        //resize the
+//	    if ($this->size) {
+//	        $size = explode('x', strtolower($this->size));
+//	        $image->resize($size[0], $size[1]);
+//	    }
+//        //save the image
+//	    $image->save($this->path . '/' . $this->filename);
+//
+//        //save the image as thumbnail version
+//	    if ($this->thumb) {
+//            if ($this->old) {
+//                $this->removeFile($this->path . '/thumb_' . $this->old);
 //            }
-//
-//            // Save the image to the specified path
-//            $image->save($this->path . '/' . $this->filename);
-//
-//            // Save the image as a thumbnail version if specified
-//            if ($this->thumb) {
-//                if ($this->old) {
-//                    $this->removeFile($this->path . '/thumb_' . $this->old);
-//                }
-//                $thumb = explode('x', $this->thumb);
-//                Image::make($this->file)->resize($thumb[0], $thumb[1])->save($this->path . '/thumb_' . $this->filename);
-//            }
-//
-//        } catch (\Exception $e) {
-//            // Handle the exception (e.g., log the error or show a message)
-//            echo 'Error: ' . $e->getMessage();
-//        }
+//	        $thumb = explode('x', $this->thumb);
+//	        $manager->read($this->file)->resize($thumb[0], $thumb[1])->save($this->path . '/thumb_' . $this->filename);
+//	    }
+//	}
 
 
-        $manager = new ImageManager(new Driver());
-        $image = $manager->read($this->file);
-        //resize the
-	    if ($this->size) {
-	        $size = explode('x', strtolower($this->size));
-	        $image->resize($size[0], $size[1]);
-	    }
-        //save the image
-	    $image->save($this->path . '/' . $this->filename);
 
-        //save the image as thumbnail version
-	    if ($this->thumb) {
-            if ($this->old) {
-                $this->removeFile($this->path . '/thumb_' . $this->old);
+
+    protected function uploadImage()
+    {
+        try {
+            $manager = new ImageManager(['driver' => 'gd']);
+            $image = $manager->make($this->file);
+
+            // Resize the image if size is specified
+            if ($this->size) {
+                $size = explode('x', strtolower($this->size));
+
+                // Validate size format
+                if (count($size) === 2 && is_numeric($size[0]) && is_numeric($size[1])) {
+                    $image->resize($size[0], $size[1]);
+                } else {
+                    throw new \Exception('Invalid size format. Use "widthxheight".');
+                }
             }
-	        $thumb = explode('x', $this->thumb);
-	        $manager->read($this->file)->resize($thumb[0], $thumb[1])->save($this->path . '/thumb_' . $this->filename);
-	    }
-	}
 
+            // Save the image to the specified path
+            $image->save($this->path . '/' . $this->filename);
+
+            // Handle thumbnail creation if required
+            if ($this->thumb) {
+                // Remove old thumbnail if it exists
+                if ($this->old) {
+                    $this->removeFile($this->path . '/thumb_' . $this->old);
+                }
+
+                // Resize and save the thumbnail
+                $thumbSize = explode('x', $this->thumb);
+                if (count($thumbSize) === 2 && is_numeric($thumbSize[0]) && is_numeric($thumbSize[1])) {
+                    $manager->make($this->file)
+                        ->resize($thumbSize[0], $thumbSize[1])
+                        ->save($this->path . '/thumb_' . $this->filename);
+                } else {
+                    throw new \Exception('Invalid thumbnail size format. Use "widthxheight".');
+                }
+            }
+        } catch (\Exception $e) {
+            throw new \Exception('Image upload failed: ' . $e->getMessage());
+        }
+    }
 
     /**
     * Upload the file if this is not a image
