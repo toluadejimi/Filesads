@@ -181,13 +181,67 @@ class FileManager
 //	}
 
 
+    protected function resizeImageWithGD($filePath, $outputPath, $newWidth, $newHeight)
+    {
+        try {
+            // Load the image
+            $image = imagecreatefromstring(file_get_contents($filePath));
+
+            // Get original dimensions
+            $width = imagesx($image);
+            $height = imagesy($image);
+
+            // If no new size is provided, retain original dimensions
+            $newWidth = $newWidth ?? $width;
+            $newHeight = $newHeight ?? $height;
+
+            // Create a new empty image
+            $newImage = imagecreatetruecolor($newWidth, $newHeight);
+
+            // Preserve transparency for PNG
+            if (image_type_to_mime_type(exif_imagetype($filePath)) === 'image/png') {
+                imagealphablending($newImage, false);
+                imagesavealpha($newImage, true);
+            }
+
+            // Resize the image
+            imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+            // Save the resized image
+            $mime = image_type_to_mime_type(exif_imagetype($filePath));
+            switch ($mime) {
+                case 'image/jpeg':
+                    imagejpeg($newImage, $outputPath, 90);
+                    break;
+                case 'image/png':
+                    imagepng($newImage, $outputPath);
+                    break;
+                case 'image/gif':
+                    imagegif($newImage, $outputPath);
+                    break;
+                default:
+                    throw new \Exception('Unsupported image format.');
+            }
+
+            // Free memory
+            imagedestroy($image);
+            imagedestroy($newImage);
+
+        } catch (\Exception $e) {
+            throw new \Exception('GD Image resizing failed: ' . $e->getMessage());
+        }
+    }
+
 
 
     protected function uploadImage()
     {
         try {
-            // Create an instance of ImageManager with GD driver
-            $manager = new ImageManager(['driver' => 'gd']);
+            // Check if GD or Imagick is preferred
+            $preferredDriver = 'imagick'; // Change to 'imagick' if you prefer Imagick
+
+            // Initialize ImageManager with the preferred driver
+            $manager = new ImageManager(['driver' => $preferredDriver]);
 
             // Read the image file
             $image = $manager->make($this->file);
@@ -225,9 +279,30 @@ class FileManager
                 }
             }
         } catch (\Exception $e) {
-            throw new \Exception('Image upload failed: ' . $e->getMessage());
+            // Fallback to native GD if Intervention fails
+            $this->resizeImageWithGD(
+                $this->file->getPathname(),
+                $this->path . '/' . $this->filename,
+                $this->size ? explode('x', $this->size)[0] : null,
+                $this->size ? explode('x', $this->size)[1] : null
+            );
+
+            // Optionally handle thumbnail with GD
+            if ($this->thumb) {
+                $thumbSize = explode('x', $this->thumb);
+                $this->resizeImageWithGD(
+                    $this->file->getPathname(),
+                    $this->path . '/thumb_' . $this->filename,
+                    $thumbSize[0],
+                    $thumbSize[1]
+                );
+            }
         }
     }
+
+
+
+
 
 
     /**
