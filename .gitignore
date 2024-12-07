@@ -1,4 +1,2 @@
-/core/vendor
-/core/storage
-*.docx
-todo.txt
+/core/.env
+/htaccess
