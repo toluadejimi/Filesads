@@ -237,11 +237,11 @@ class FileManager
     protected function uploadImage()
     {
         try {
-            // Check if GD or Imagick is preferred
-            $preferredDriver = 'imagick'; // Change to 'imagick' if you prefer Imagick
+            // Use a valid driver configuration
+            $driver = 'imagick'; // Change to 'imagick' if you want to use Imagick
 
-            // Initialize ImageManager with the preferred driver
-            $manager = new ImageManager(['driver' => $preferredDriver]);
+            // Initialize ImageManager with the specified driver
+            $manager = new ImageManager(['driver' => $driver]);
 
             // Read the image file
             $image = $manager->make($this->file);
@@ -279,24 +279,7 @@ class FileManager
                 }
             }
         } catch (\Exception $e) {
-            // Fallback to native GD if Intervention fails
-            $this->resizeImageWithGD(
-                $this->file->getPathname(),
-                $this->path . '/' . $this->filename,
-                $this->size ? explode('x', $this->size)[0] : null,
-                $this->size ? explode('x', $this->size)[1] : null
-            );
-
-            // Optionally handle thumbnail with GD
-            if ($this->thumb) {
-                $thumbSize = explode('x', $this->thumb);
-                $this->resizeImageWithGD(
-                    $this->file->getPathname(),
-                    $this->path . '/thumb_' . $this->filename,
-                    $thumbSize[0],
-                    $thumbSize[1]
-                );
-            }
+            throw new \Exception('Image upload failed: ' . $e->getMessage());
         }
     }
 
