@@ -34,9 +34,7 @@ class TicketController extends Controller
 
     public function info()
     {
-
-      return view ('template.basic.info');
-
+      return view ('templates.basic.info');
     }
 
 }
