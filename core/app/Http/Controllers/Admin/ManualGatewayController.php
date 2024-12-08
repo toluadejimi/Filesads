@@ -28,7 +28,7 @@ class ManualGatewayController extends Controller
 
     public function store(Request $request)
     {
-    
+
         $formProcessor = new FormProcessor();
         $this->validation($request,$formProcessor);
 
@@ -43,7 +43,13 @@ class ManualGatewayController extends Controller
         $filename = null;
         if ($request->hasFile('image')) {
             try {
-                $filename = fileUploader($request->image,getFilePath('gateway'));
+
+                if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                    $image = $request->file('image');
+                    $filename = uniqid() . '.' . $image->getClientOriginalExtension();
+                    $image->storeAs('gateway', $filename, 'public');
+                }
+
             } catch (\Exception $exp) {
                 $notify[] = ['errors', 'Image could not be uploaded'];
                 return back()->withNotify($notify);
@@ -90,7 +96,7 @@ class ManualGatewayController extends Controller
 
     public function update(Request $request, $code)
     {
-        
+
         $formProcessor = new FormProcessor();
         $this->validation($request,$formProcessor,true);
 
