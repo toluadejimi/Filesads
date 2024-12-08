@@ -23,8 +23,8 @@ class VisitorManager
 {
 
     /**
-     * Selects and returns the appropriate advertisement based on the publisher ID, ad type, 
-     * and the visitor's location. If no suitable ad is found or certain checks fail, 
+     * Selects and returns the appropriate advertisement based on the publisher ID, ad type,
+     * and the visitor's location. If no suitable ad is found or certain checks fail,
      * a default ad is returned.
      *
      * @param string $pubId Encrypted publisher ID.
@@ -125,7 +125,6 @@ class VisitorManager
         }
 
 
-
         $existIpLog = $existingIp->iplogs()->where('advertise_id', $ad->id)->where('time', '>=', Carbon::now()->subMinutes(gs('intervals'))->format('H:i:s'))->first();
 
         $publisherAd                    = PublisherAd::firstOrNew(['advertise_id' => $ad->id, 'publisher_id' => $publisher->id, 'date' => Carbon::now()->toDateString()]);
@@ -160,7 +159,7 @@ class VisitorManager
         }
 
         $redirectUrl = route('adClicked', [encrypt($publisherId), $ad->track_id, $existingIp]);
-        $adImage     = getImage(getFilePath('advertise') . '/' . $ad->image);
+        $adImage     = url('')."/core/storage/app/public/advertise/".$ad->image;
 
         $ad->impression += 1;
         $ad->save();
@@ -299,7 +298,7 @@ class VisitorManager
 
     /**
      * Returns the HTML for displaying a randomly selected advertisement.
-     * This method generates the ad's image, sets the redirection URL for clicks, 
+     * This method generates the ad's image, sets the redirection URL for clicks,
      * and includes a small label indicating the advertisement is served by the site.
      *
      * @param string $redirectUrl The URL to redirect to when the ad is clicked.
@@ -315,7 +314,7 @@ class VisitorManager
     }
 
     /**
-     * 
+     *
      * Detects the country based on the provided IP address using various services.
      * The method supports multiple services for IP-based country detection, such as:
      * - **ipstack**
