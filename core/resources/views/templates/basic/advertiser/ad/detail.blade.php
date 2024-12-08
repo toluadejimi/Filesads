@@ -104,7 +104,7 @@
                 </div>
                 <div class="card-body">
                     <div class="mb-3">
-                        <img class="thumb rounded" src="{{url('')}}/core/storage/app/public/advertise/{{$advertise->image}}) }}"
+                        <img class="thumb rounded" src="{{url('')}}/core/storage/app/public/advertise/{{$advertise->image}} }}"
                             width="{{ $advertise->type->width }}" height="{{ $advertise->type->height }}" />
                     </div>
                     <div class="mb-3">
