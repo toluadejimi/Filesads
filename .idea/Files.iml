@@ -161,6 +161,9 @@
       <excludeFolder url="file://$MODULE_DIR$/core/vendor/vonage/jwt" />
       <excludeFolder url="file://$MODULE_DIR$/core/vendor/vonage/nexmo-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/core/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/intervention/gif" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/intervention/image" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
