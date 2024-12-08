@@ -19,7 +19,7 @@
                             <td>
                                 <div class="d-flex gap-2 flex-wrap align-items-center auhtor-item">
                                     <div class="customer__thumb">
-                                        <img src="{{url('')}}/storage/advertise/{{$ad->image}}"
+                                        <img src="{{url('')}}/core/storage/app/public/advertise{{$ad->image}}"
                                             class="fit-image" alt="@lang('Image')" />
                                     </div>
                                     <div>
